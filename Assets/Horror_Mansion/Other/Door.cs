@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using CSA;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class Door : MonoBehaviour
@@ -28,10 +29,12 @@ public class Door : MonoBehaviour
         {
             transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, defaulRot, Time.deltaTime * smooth);
         }
+
         if (Input.GetKeyDown(KeyCode.E) && trig)
         {
             open = !open;
         }
+
         if (trig)
         {
             if (open)
@@ -44,13 +47,22 @@ public class Door : MonoBehaviour
             }
         }
     }
-    private void OnTriggerEnter(Collider coll)//вход и выход в\из  триггера 
+    private void OnTriggerStay(Collider coll)//вход и выход в\из  триггера 
     {
-        if (coll.tag == "Player")
+        if (!coll.CompareTag(Tags.Player))
+            return;
+
+        Vector3 dir = transform.position - coll.transform.position;
+        if (Vector3.Dot(dir, coll.transform.forward) < 0)
+        {
+            txt.text = "";
+            trig = false;
+        }
+        else
         {
             if (!open)
             {
-                txt.text = "Close E ";
+                txt.text = "Close E";
             }
             else
             {
@@ -58,10 +70,11 @@ public class Door : MonoBehaviour
             }
             trig = true;
         }
+        
     }
     private void OnTriggerExit(Collider coll)//вход и выход в\из  триггера 
     {
-        if (coll.tag == "Player")
+        if (coll.CompareTag(Tags.Player))
         {
             txt.text = " ";
             trig = false;

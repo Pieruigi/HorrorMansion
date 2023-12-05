@@ -84,7 +84,7 @@ namespace CSA.Gameplay
         GameObject GetPlayer()
         {
             if (!player)
-                player = GameObject.FindGameObjectWithTag("Player");
+                player = GameObject.FindGameObjectWithTag("GameController");
 
             return player;
         }
@@ -117,20 +117,24 @@ namespace CSA.Gameplay
 
         public bool IsInteractable()
         {
-            return !locked && !interacting;
+            return !locked;
         }
+
+    
 
         /// <summary>
         /// Param1: the interaction vector position
         /// </summary>
         /// <param name="parameters"></param>
-        public void StartInteraction(object[] parameters)
+        public void StartInteraction(object[] parameters = null)
         {
             // We first check for interaction enabled
             if (!IsInteractable())
                 return;
 
             interacting = true;
+
+            GetComponent<Collider>().enabled = false;
 
             // We create an object to handle the door
             Vector3 handlePosition = (Vector3)parameters[0];
@@ -143,7 +147,7 @@ namespace CSA.Gameplay
 
         }
 
-        public void StopInteraction()
+        public void StopInteraction(object[] parameters = null)
         {
             // When we stop interacting the door we close it if it's almost closed
             float m = 3f;
@@ -163,10 +167,10 @@ namespace CSA.Gameplay
                     RotateDoor(m);
                 }
             }
-                
 
+            GetComponent<Collider>().enabled = true;
             // Just destroy the handle
-            Destroy(handle);
+            //Destroy(handle);
 
             interacting = false;
         }

@@ -6,11 +6,12 @@ namespace CSA.Interfaces
 {
     public interface IInteractable
     {
-        void StartInteraction(object[] parameters);
+        void StartInteraction(object[] parameters = null);
 
-        void StopInteraction();
+        void StopInteraction(object[] parameters = null);
 
         bool IsInteractable();
+
     }
 
 }

@@ -93,18 +93,18 @@ namespace EvolveGames
         private void FixedUpdate()
         {
             
-            if (ItemChangeLogo)
-            {
-                Color OpacityColor = ItemCanvasLogo.color;
-                OpacityColor.a = Mathf.Lerp(OpacityColor.a, 0, 20 * Time.deltaTime);
-                ItemCanvasLogo.color = OpacityColor;
-            }
-            else
-            {
-                Color OpacityColor = ItemCanvasLogo.color;
-                OpacityColor.a = Mathf.Lerp(OpacityColor.a, 1, 6 * Time.deltaTime);
-                ItemCanvasLogo.color = OpacityColor;
-            }
+            //if (ItemChangeLogo)
+            //{
+            //    Color OpacityColor = ItemCanvasLogo.color;
+            //    OpacityColor.a = Mathf.Lerp(OpacityColor.a, 0, 20 * Time.deltaTime);
+            //    ItemCanvasLogo.color = OpacityColor;
+            //}
+            //else
+            //{
+            //    Color OpacityColor = ItemCanvasLogo.color;
+            //    OpacityColor.a = Mathf.Lerp(OpacityColor.a, 1, 6 * Time.deltaTime);
+            //    ItemCanvasLogo.color = OpacityColor;
+            //}
         }
     }
 

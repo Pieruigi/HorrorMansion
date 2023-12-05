@@ -904,6 +904,7 @@ GameObject:
   - component: {fileID: 5963774893618288653}
   - component: {fileID: 6452111083556350152}
   - component: {fileID: 5484289203772514503}
+  - component: {fileID: 1497052425487702504}
   m_Layer: 0
   m_Name: PlayerController
   m_TagString: GameController
@@ -1044,6 +1045,19 @@ CapsuleCollider:
   m_Height: 2.1625967
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1497052425487702504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3111838490551226213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34d3fce20b7f61d488340114ff7399e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionRange: 1.5
 --- !u!1 &3291325433872598073
 GameObject:
   m_ObjectHideFlags: 0
@@ -1694,7 +1708,7 @@ GameObject:
   - component: {fileID: 5501642963067965352}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
