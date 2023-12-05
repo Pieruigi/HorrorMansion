@@ -14,6 +14,9 @@ namespace CSA.Gameplay
         [SerializeField]
         Transform pivot;
 
+        [SerializeField]
+        bool clockwise = false;
+
         float minAngle = 0;
         float maxAngle = 90f;
 
@@ -21,6 +24,22 @@ namespace CSA.Gameplay
         GameObject handle;
         bool interacting = false;
         Vector3 lastHandlePosition;
+
+        private void Awake()
+        {
+            // Assuming the door is closed on awake, we set the real angles
+            if (!clockwise)
+            {
+                //minAngle += transform.localEulerAngles.y;
+                //maxAngle += transform.localEulerAngles.y;
+                float tmp = minAngle;
+                minAngle = -maxAngle;
+                maxAngle = tmp;
+            }
+            
+            Debug.Log($"MinAngle:{minAngle}");
+            Debug.Log($"MaxAngle:{maxAngle}");
+        }
 
         // Start is called before the first frame update
         void Start()
@@ -49,14 +68,8 @@ namespace CSA.Gameplay
             handleMove.y = 0;
             if(handleMove.magnitude > 0)
             {
-                // Get the vector from the pivot to the handle, that should be the new door orientation
-                Vector3 direction = handle.transform.position - pivot.position;
-                direction.y = 0;
-                // Compute the angle between the pivot forward direction and the new direction
-                float angle = Vector3.SignedAngle(-pivot.right, direction, Vector3.up);
-                Debug.Log($"Angle:{angle}");
                 // Rotate the door
-                transform.forward = Quaternion.Euler(0f, angle, 0f) * transform.forward;
+                RotateDoor(ComputeAngle());
             }
             
             
@@ -74,6 +87,32 @@ namespace CSA.Gameplay
                 player = GameObject.FindGameObjectWithTag("Player");
 
             return player;
+        }
+
+        void RotateDoor(float angle)
+        {
+            Debug.Log($"RotateDoor - angle:{angle}");
+           
+            transform.forward = Quaternion.Euler(0f, angle, 0f) * transform.forward;
+            Vector3 eulers = Vector3.zero;
+            
+            eulers = transform.localEulerAngles;
+            if (eulers.y > 180f)
+                eulers.y -= 360f;
+            eulers.y = Mathf.Clamp(eulers.y, minAngle, maxAngle);
+            
+            Debug.Log($"RotateDoor - eulers:{eulers}");
+            transform.localEulerAngles = eulers;
+        }
+
+        float ComputeAngle()
+        {
+            Vector3 direction = handle.transform.position - pivot.position;
+            direction.y = 0;
+            // Compute the angle between the pivot forward direction and the new direction
+            float angle = Vector3.SignedAngle(-pivot.right, direction, Vector3.up);
+            Debug.Log("angle:" + angle);
+            return angle;
         }
 
         public bool IsInteractable()
@@ -106,6 +145,26 @@ namespace CSA.Gameplay
 
         public void StopInteraction()
         {
+            // When we stop interacting the door we close it if it's almost closed
+            float m = 3f;
+            if (clockwise)
+            {
+                if (transform.localEulerAngles.y < minAngle + m)
+                {
+                    RotateDoor(-m);
+                }
+            }
+            else
+            {
+                float y = transform.localEulerAngles.y;
+                if (y > 180f) y -= 360f;
+                if (y > maxAngle - m)
+                {
+                    RotateDoor(m);
+                }
+            }
+                
+
             // Just destroy the handle
             Destroy(handle);
 
