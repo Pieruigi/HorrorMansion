@@ -35,7 +35,7 @@ namespace CSA.Gameplay
         GameObject player;
         
         // Start is called before the first frame update
-        void Start()
+        protected virtual void Start()
         {
             Initialize();
             ChooseVictim();
@@ -65,6 +65,7 @@ namespace CSA.Gameplay
         /// <returns></returns>
         protected async virtual Task DoKillTheVictim()
         {
+
             await Task.Delay(System.TimeSpan.FromSeconds(3)); // Do some killing here
         }
 
