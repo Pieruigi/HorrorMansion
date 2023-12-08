@@ -8,20 +8,131 @@ namespace CSA.Gameplay
 {
     public class TortureGroup : MonoBehaviour
     {
-        //public static UnityAction<TortureGroup> OnRelease;
-        //public static UnityAction<TortureGroup> OnKidnapped;
+      
         public UnityAction OnVictimKilled;
         public UnityAction OnVictimSaved;
 
+        [SerializeField]
+        GameObject victimPrefabs;
 
         [SerializeField]
         float victimLifeTime = 10;
+
+        [SerializeField]
+        Collider lookAtTrigger;
+
+        [SerializeField]
+        float lookAtDistance = 2f;
+
+        [SerializeField]
+        Collider saveTrigger;
+
+        [SerializeField]
+        float saveDistance = 1.5f;
+
+        bool awaitForKilling = false;
+        bool saving = false;
+        GameObject player;
         
         // Start is called before the first frame update
         void Start()
         {
-            //RegisterVictimCallbacks();
+            Initialize();
             ChooseVictim();
+        }
+
+        protected virtual void Update()
+        {
+            // Is lifetime expired or victim already dead?
+            if ((victimLifeTime<0 && !awaitForKilling) || saving)
+                return;
+
+            // The victim is still alive
+            if (!awaitForKilling) // You can still save the victim
+            {
+                CheckLifeTime();   
+            }
+            else // The victim is doomed
+            {
+                AwaitForKilling();
+            }     
+        }
+
+
+        /// <summary>
+        /// Override this method to kill the victim ( play animations, vfx, etc )
+        /// </summary>
+        /// <returns></returns>
+        protected async virtual Task DoKillTheVictim()
+        {
+            await Task.Delay(System.TimeSpan.FromSeconds(3)); // Do some killing here
+        }
+
+        /// <summary>
+        /// Override this method to save the victim ( play animations, vfx, etc )
+        /// </summary>
+        /// <returns></returns>
+        protected async virtual Task DoSaveTheVictim()
+        {
+            await Task.Delay(System.TimeSpan.FromSeconds(3)); // Do some killing here
+        }
+
+        
+        void Initialize()
+        {
+            player = GameObject.FindGameObjectWithTag(Tags.Player);
+            // Activate the save trigger 
+            saveTrigger.enabled = true;
+            // Deactivate the look at trigger
+            lookAtTrigger.enabled = false;
+        }
+
+        void CheckLifeTime()
+        {
+            victimLifeTime -= Time.deltaTime;
+
+            if (victimLifeTime < 0)
+            {
+                // Deactivate the save trigger 
+                saveTrigger.enabled = false;
+                // Activate the look at trigger
+                lookAtTrigger.enabled = true;
+                // Await for the player
+                awaitForKilling = true;
+            }
+        }
+
+        void CheckForSaving()
+        {
+            if (victimLifeTime < 0)
+                return;
+
+        }
+
+        /// <summary>
+        /// We want the player to see how the victim is going to be killed
+        /// </summary>
+        void AwaitForKilling()
+        {
+            // Compute distance between collider and player
+            float distance = Vector3.ProjectOnPlane(player.transform.position - lookAtTrigger.transform.position, Vector3.up).magnitude;
+            // Is the player within the minimum range ?
+            if(distance < lookAtDistance)
+            {
+                // Raycast
+                Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+                RaycastHit hitInfo;
+                if(Physics.Raycast(ray, out hitInfo, distance))
+                {
+                    // Check if we hit the collider
+                    if(hitInfo.collider == lookAtTrigger)
+                    {
+                        // Ok, kill the victim
+                        awaitForKilling = false;
+                        KillTheVictim();
+                    }
+                }
+            }
         }
 
         void ChooseVictim()
@@ -30,21 +141,35 @@ namespace CSA.Gameplay
             StartTorturing();
         }
 
-        protected async virtual void StartTorturing()
+        protected virtual void StartTorturing()
         {
             Debug.Log($"[{nameof(TortureGroup)} - Start torturing...]");
-            bool killed = Random.Range(0,2) == 0 ? true : false;
-            await Task.Delay(System.TimeSpan.FromSeconds(victimLifeTime));
-            Debug.Log($"[{nameof(TortureGroup)} - Victim still alive:{!killed}]");
-            if (killed)
-                OnVictimKilled?.Invoke();
-            else
-                OnVictimSaved?.Invoke();
-
+            
         }
      
-       
+        /// <summary>
+        /// Called internally when life time is expired and the player is close
+        /// </summary>
+        async void KillTheVictim()
+        {
+            await DoKillTheVictim();
+
+            OnVictimKilled?.Invoke();
+        }
+
+        
+        /// <summary>
+        /// Called externally by the player clicking on the save trigger
+        /// </summary>
+        public async void SaveTheVictim()
+        {
+            saving = true;
+            await DoSaveTheVictim(); // Set the victim free here
+
+            OnVictimSaved?.Invoke();
+        }
      
+
     }
 
 }
