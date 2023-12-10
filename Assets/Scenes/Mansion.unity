@@ -57996,22 +57996,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 22311679140972226, guid: dc5ca6677f7294f4b8e68c76ceb856c6, type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
-    - target: {fileID: 661456571537527439, guid: dc5ca6677f7294f4b8e68c76ceb856c6, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.001
-      objectReference: {fileID: 0}
-    - target: {fileID: 661456571537527439, guid: dc5ca6677f7294f4b8e68c76ceb856c6, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.066
-      objectReference: {fileID: 0}
-    - target: {fileID: 661456571537527439, guid: dc5ca6677f7294f4b8e68c76ceb856c6, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.097
-      objectReference: {fileID: 0}
     - target: {fileID: 971132548666405420, guid: dc5ca6677f7294f4b8e68c76ceb856c6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 275.55844
@@ -58056,37 +58040,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerController
       objectReference: {fileID: 0}
-    - target: {fileID: 3580323324172613359, guid: dc5ca6677f7294f4b8e68c76ceb856c6, type: 3}
-      propertyPath: m_Height
-      value: 1.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3580323324172613359, guid: dc5ca6677f7294f4b8e68c76ceb856c6, type: 3}
-      propertyPath: m_Radius
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3580323324172613359, guid: dc5ca6677f7294f4b8e68c76ceb856c6, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5484289203772514503, guid: dc5ca6677f7294f4b8e68c76ceb856c6, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5963774893618288653, guid: dc5ca6677f7294f4b8e68c76ceb856c6, type: 3}
-      propertyPath: Items
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6452111083556350152, guid: dc5ca6677f7294f4b8e68c76ceb856c6, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8393077854019469297, guid: dc5ca6677f7294f4b8e68c76ceb856c6, type: 3}
-      propertyPath: m_TagString
-      value: MainCamera
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6452111083556350152, guid: dc5ca6677f7294f4b8e68c76ceb856c6, type: 3}
-    - {fileID: 1497052425487702504, guid: dc5ca6677f7294f4b8e68c76ceb856c6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
