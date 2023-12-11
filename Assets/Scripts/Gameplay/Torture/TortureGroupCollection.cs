@@ -32,6 +32,10 @@ namespace CSA.Gameplay
 
             // Create a new group
             currentGroup = Instantiate(prefabs[Random.Range(0, prefabs.Count)]);
+            // Set position and rotation
+            currentGroup.transform.position = transform.position;
+            currentGroup.transform.rotation = transform.rotation;
+            // Register callbacks
             RegisterTortureGroupCallbacks(currentGroup);
             Debug.Log($"[{nameof(TortureGroupCollection)} - New group chosen:{currentGroup.name}]");
         }

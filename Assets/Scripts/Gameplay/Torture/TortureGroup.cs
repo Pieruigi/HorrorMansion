@@ -64,13 +64,10 @@ namespace CSA.Gameplay
 
             // The victim is still alive
             if (!awaitForKilling) // You can still save the victim
-            {
-                CheckLifeTime();   
-            }
+                CheckLifeTime(); 
             else // The victim is doomed
-            {
                 AwaitForKilling();
-            }     
+          
         }
 
 
@@ -133,15 +130,15 @@ namespace CSA.Gameplay
             // Compute distance between collider and player
             float distance = Vector3.ProjectOnPlane(player.transform.position - lookAtTrigger.transform.position, Vector3.up).magnitude;
             // Is the player within the minimum range ?
-            if(distance < lookAtDistance)
+            if (distance < lookAtDistance)
             {
                 // Raycast
                 Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
                 RaycastHit hitInfo;
-                if(Physics.Raycast(ray, out hitInfo, distance))
+                if (Physics.Raycast(ray, out hitInfo, distance))
                 {
                     // Check if we hit the collider
-                    if(hitInfo.collider == lookAtTrigger)
+                    if (hitInfo.collider == lookAtTrigger)
                     {
                         // Ok, kill the victim
                         awaitForKilling = false;
@@ -149,7 +146,10 @@ namespace CSA.Gameplay
                     }
                 }
             }
+           
         }
+
+       
 
         void ChooseVictim()
         {

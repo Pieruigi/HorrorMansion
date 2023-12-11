@@ -274,6 +274,7 @@ Transform:
   - {fileID: 1539711841881400488}
   - {fileID: 7622331083893995432}
   - {fileID: 40149698059212438}
+  - {fileID: 67238711002691515}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7154605543921731542
@@ -297,3 +298,65 @@ MonoBehaviour:
   lookAtDistance: 2
   saveTrigger: {fileID: 9089300921168094901}
   saveDistance: 1.5
+--- !u!1001 &5402907382603154546
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3452133052917431651}
+    m_Modifications:
+    - target: {fileID: 5337921021173167049, guid: b4cf66435972b864da15a564d9d88e73, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.747
+      objectReference: {fileID: 0}
+    - target: {fileID: 5337921021173167049, guid: b4cf66435972b864da15a564d9d88e73, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5337921021173167049, guid: b4cf66435972b864da15a564d9d88e73, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 5337921021173167049, guid: b4cf66435972b864da15a564d9d88e73, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.782934
+      objectReference: {fileID: 0}
+    - target: {fileID: 5337921021173167049, guid: b4cf66435972b864da15a564d9d88e73, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5337921021173167049, guid: b4cf66435972b864da15a564d9d88e73, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.6221048
+      objectReference: {fileID: 0}
+    - target: {fileID: 5337921021173167049, guid: b4cf66435972b864da15a564d9d88e73, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5337921021173167049, guid: b4cf66435972b864da15a564d9d88e73, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5337921021173167049, guid: b4cf66435972b864da15a564d9d88e73, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 76.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 5337921021173167049, guid: b4cf66435972b864da15a564d9d88e73, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8493056548524055082, guid: b4cf66435972b864da15a564d9d88e73, type: 3}
+      propertyPath: m_Name
+      value: Ventriloquist
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b4cf66435972b864da15a564d9d88e73, type: 3}
+--- !u!4 &67238711002691515 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5337921021173167049, guid: b4cf66435972b864da15a564d9d88e73, type: 3}
+  m_PrefabInstance: {fileID: 5402907382603154546}
+  m_PrefabAsset: {fileID: 0}
