@@ -45,10 +45,6 @@ namespace CSA.Gameplay
         {
             Debug.Log($"[{nameof(TortureGroupCollectionManager)} - TortureSome()]");
 
-            // Release the old collection if any
-            if (current)
-                current.Release();
-
             // Fill the list of choices: all except the last chosen one if any
             List<TortureGroupCollection> choices = new List<TortureGroupCollection>();
             foreach(var c in collections)
@@ -59,6 +55,10 @@ namespace CSA.Gameplay
 
             // Choose a new torture collection
             current = choices[Random.Range(0, choices.Count)];
+            // If we already used that group before we need to release it ( we are sure this way we are not close enough to see the
+            // releasing process that would be eventually in another place )
+            if (current.SomeoneHasDeadHere())
+                current.Release();
             Debug.Log($"[{nameof(TortureGroupCollectionManager)} - New collection chosen:{current.name}]");
             current.TortureSomeone();
         }

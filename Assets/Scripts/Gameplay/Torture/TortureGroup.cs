@@ -36,16 +36,22 @@ namespace CSA.Gameplay
         [SerializeField]
         float saveDistance = 1.5f;
 
+        [SerializeField]
+        float killAnimationLength = 3f;
+
+        [SerializeField]
+        float saveAnimationLength = 3f;
+
         bool awaitForKilling = false;
         bool saving = false;
         GameObject player;
 
         Animator[] animators;
         GameObject victim;
-        string animIdleParam = "Idle";
-        string animKillParam = "Kill";
-        string animJoyParam = "Joy";
-        string animSadParam = "Sad";
+        //string animIdleParam = "Idle";
+        string killAnimParam = "Kill";
+        //string animJoyParam = "Joy";
+        string saveAnimParam = "Save";
 
         // Start is called before the first frame update
         protected virtual void Start()
@@ -77,8 +83,11 @@ namespace CSA.Gameplay
         /// <returns></returns>
         protected async virtual Task DoKillTheVictim()
         {
+            Debug.Log("Killing the victim...");
+            foreach (Animator animator in animators)
+                animator.SetTrigger(killAnimParam);
 
-            await Task.Delay(System.TimeSpan.FromSeconds(3)); // Do some killing here
+            await Task.Delay(System.TimeSpan.FromSeconds(killAnimationLength)); // Do some killing here
         }
 
         /// <summary>
@@ -87,9 +96,12 @@ namespace CSA.Gameplay
         /// <returns></returns>
         protected async virtual Task DoSaveTheVictim()
         {
-            await Task.Delay(System.TimeSpan.FromSeconds(3)); // Do some killing here
+            foreach (Animator animator in animators)
+                animator.SetTrigger(saveAnimParam);
+            await Task.Delay(System.TimeSpan.FromSeconds(saveAnimationLength)); // Do some killing here
         }
 
+        
         
         void Initialize()
         {
@@ -112,6 +124,7 @@ namespace CSA.Gameplay
                 lookAtTrigger.enabled = true;
                 // Await for the player
                 awaitForKilling = true;
+                Debug.Log("Victim is doomed, awaiting for the player...");
             }
         }
 

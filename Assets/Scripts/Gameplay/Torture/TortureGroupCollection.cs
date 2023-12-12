@@ -48,6 +48,11 @@ namespace CSA.Gameplay
             Destroy(currentGroup.gameObject);
             currentGroup = null;
         }
+
+        public bool SomeoneHasDeadHere()
+        {
+            return currentGroup != null;
+        }
       
     }
 
