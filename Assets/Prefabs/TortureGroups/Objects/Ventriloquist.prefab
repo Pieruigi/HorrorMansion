@@ -118,6 +118,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chainsaw
       objectReference: {fileID: 0}
+    - target: {fileID: 1810734880674254119, guid: fee39401686d6404cae57ca81889d9c9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2593290929073182953, guid: fee39401686d6404cae57ca81889d9c9, type: 3}
       propertyPath: m_Enabled
       value: 1
