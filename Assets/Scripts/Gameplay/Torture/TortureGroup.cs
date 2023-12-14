@@ -12,14 +12,17 @@ namespace CSA.Gameplay
         public UnityAction OnVictimKilled;
         public UnityAction OnVictimSaved;
 
-        [SerializeField]
-        List<GameObject> victimPrefabs;
+        //[SerializeField]
+        //List<GameObject> victimPrefabs;
 
-        [SerializeField]
-        Transform victimSpawnPoint;
+        //[SerializeField]
+        //Transform victimSpawnPoint;
 
         [SerializeField]
         GameObject killer;
+
+        [SerializeField]
+        GameObject victim;
 
         [SerializeField]
         float victimLifeTime = 10;
@@ -47,7 +50,7 @@ namespace CSA.Gameplay
         GameObject player;
 
         Animator[] animators;
-        GameObject victim;
+        
         //string animIdleParam = "Idle";
         string killAnimParam = "Kill";
         //string animJoyParam = "Joy";
@@ -168,9 +171,9 @@ namespace CSA.Gameplay
         {
             Debug.Log($"[{nameof(TortureGroup)} - Choosing a new victim...]");
             // Create a new random victim
-            victim = Instantiate(victimPrefabs[Random.Range(0, victimPrefabs.Count)], victimSpawnPoint);
-            victim.transform.localPosition = Vector3.zero;
-            victim.transform.localRotation = Quaternion.identity;
+            //victim = Instantiate(victimPrefabs[Random.Range(0, victimPrefabs.Count)], victimSpawnPoint);
+            //victim.transform.localPosition = Vector3.zero;
+            //victim.transform.localRotation = Quaternion.identity;
         }
 
         void InitializeAnimators()
