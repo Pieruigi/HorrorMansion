@@ -67,6 +67,13 @@ namespace CSA.Gameplay
 
         protected virtual void Update()
         {
+
+#if UNITY_EDITOR
+            if (Input.GetKeyDown(KeyCode.K))
+                KillTheVictim();
+#endif
+
+
             // Is lifetime expired or victim already dead?
             if ((victimLifeTime<0 && !awaitForKilling) || saving)
                 return;
