@@ -5,6 +5,10 @@ using UnityEngine;
 
 namespace CSA.Gameplay
 {
+    /// <summary>
+    /// It can be used together with the ObjectActivator script
+    /// </summary>
+
     public class SkeletonAttacher : MonoBehaviour
     {
 
