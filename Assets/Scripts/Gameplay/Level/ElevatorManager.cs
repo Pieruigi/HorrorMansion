@@ -21,7 +21,7 @@ namespace CSA.Gameplay
                 
         }
 
-        public void Initialize()
+        public void Randomize()
         {
             //
             // Connecting floors
@@ -64,6 +64,20 @@ namespace CSA.Gameplay
                 }
 
             }
+
+            // Set a starting floor for each elevator
+            foreach(var e in elevators)
+            {
+                // Get the floor index relative to the elevator floor list
+                int index = Random.Range(0, e.Floors.Count);
+                // Move to the new floor
+                e.MoveToFloor(e.GetFloorAt(index));
+            }
+        }
+
+        public int GetElevatorIndex(Elevator elevator)
+        {
+            return elevators.IndexOf(elevator);
         }
     }
 

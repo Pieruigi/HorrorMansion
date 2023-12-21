@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace CSA.Gameplay
@@ -8,6 +9,13 @@ namespace CSA.Gameplay
     {
         // Reacheable floors
         List<Floor> floors = new List<Floor>();
+
+        public IList<Floor> Floors
+        {
+            get { return floors.AsReadOnly(); }
+        }
+
+        Floor currentFloor;
 
         // Start is called before the first frame update
         void Start()
@@ -41,6 +49,19 @@ namespace CSA.Gameplay
                 floors.Add(floor);
             else
                 floors.Insert(index, floor);
+        }
+
+        public Floor GetFloorAt(int index)
+        {
+            return floors[index];
+        }
+
+        public async void MoveToFloor(Floor destinationFloor)
+        {
+            await Task.Delay(1000);
+            Transform target = destinationFloor.GetElevatorTargetAt(ElevatorManager.Instance.GetElevatorIndex(this));
+            transform.position = target.position;
+            currentFloor = destinationFloor;
         }
 
         public void ClearAll()

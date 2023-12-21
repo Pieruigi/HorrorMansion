@@ -34,7 +34,7 @@ namespace CSA.Builder
 
         void Initialize()
         {
-            ElevatorManager.Instance.Initialize();
+            ElevatorManager.Instance.Randomize();
         }
         
     }
