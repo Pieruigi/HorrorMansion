@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -7,8 +8,14 @@ namespace CSA.Gameplay
 {
     public class Elevator : MonoBehaviour
     {
+        [SerializeField]
+        GameObject leftDoor, rightDoor;
+
         // Reacheable floors
         List<Floor> floors = new List<Floor>();
+
+        bool doorIsOpen = false;
+        float speed = 1.5f;
 
         public IList<Floor> Floors
         {
@@ -27,6 +34,44 @@ namespace CSA.Gameplay
         void Update()
         {
 
+        }
+
+        async Task CloseDoors()
+        {
+            if (!doorIsOpen)
+                return;
+            
+            float time = 1;
+            leftDoor.transform.DOLocalMoveX(-0.3f, time, false).SetEase(Ease.OutBounce);
+            rightDoor.transform.DOLocalMoveX(0.3f, time, false).SetDelay(.2f).SetEase(Ease.OutBounce);
+            await Task.Delay(System.TimeSpan.FromSeconds(time * 1.2f));
+            doorIsOpen = false;
+            
+        }
+
+        async Task OpenDoors()
+        {
+            if (doorIsOpen)
+                return;
+
+            float time = 1f;
+            leftDoor.transform.DOLocalMoveX(0.85f, time, false).SetEase(Ease.OutBounce);
+            rightDoor.transform.DOLocalMoveX(-0.85f, time, false).SetDelay(.2f).SetEase(Ease.OutBounce);
+            await Task.Delay(System.TimeSpan.FromSeconds(time * 1.2f));
+            doorIsOpen = true;
+        }
+
+        async Task Move(Floor targetFloor)
+        {
+            if (currentFloor == targetFloor)
+                return;
+            
+            Transform target = targetFloor.GetElevatorTargetAt(ElevatorManager.Instance.GetElevatorIndex(this));
+            // Move to target position
+            float time = Mathf.Abs(transform.position.y - target.position.y) / speed;
+            transform.DOMoveY(target.position.y, time, false);
+            await Task.Delay(System.TimeSpan.FromSeconds(time * 1.2f));
+            currentFloor = targetFloor;
         }
 
         /// <summary>
@@ -58,11 +103,18 @@ namespace CSA.Gameplay
 
         public async void MoveToFloor(Floor destinationFloor)
         {
-            await Task.Delay(1000);
-            Transform target = destinationFloor.GetElevatorTargetAt(ElevatorManager.Instance.GetElevatorIndex(this));
-            transform.position = target.position;
-            currentFloor = destinationFloor;
+            // Close doors if open
+            await CloseDoors();
+
+            // Move
+            await Move(destinationFloor);
+
+            // Open doors
+            await OpenDoors();
+
         }
+
+
 
         public void ClearAll()
         {
