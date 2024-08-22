@@ -49,8 +49,8 @@ public class Door : MonoBehaviour
     }
     private void OnTriggerStay(Collider coll)//вход и выход в\из  триггера 
     {
-        if (!coll.CompareTag(Tags.Player))
-            return;
+        //if (!coll.CompareTag(Tags.Player))
+        //    return;
 
         Vector3 dir = transform.position - coll.transform.position;
         if (Vector3.Dot(dir, coll.transform.forward) < 0)
@@ -74,10 +74,10 @@ public class Door : MonoBehaviour
     }
     private void OnTriggerExit(Collider coll)//вход и выход в\из  триггера 
     {
-        if (coll.CompareTag(Tags.Player))
-        {
-            txt.text = " ";
-            trig = false;
-        }
+        //if (coll.CompareTag(Tags.Player))
+        //{
+        //    txt.text = " ";
+        //    trig = false;
+        //}
     }
 }

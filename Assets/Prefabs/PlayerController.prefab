@@ -1665,6 +1665,7 @@ GameObject:
   - component: {fileID: 3989176490580258636}
   - component: {fileID: 7106223073269302707}
   - component: {fileID: 5501642963067965352}
+  - component: {fileID: 1836185773285394716}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -1766,6 +1767,21 @@ MonoBehaviour:
   EnabledRoationMovement: 1
   RoationMovementSmooth: 6.7
   RoationMovementAmount: 4
+--- !u!114 &1836185773285394716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8393077854019469297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdcd06815c47d30489f70df42db56a48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frustumSettings:
+    baseSettings: {fileID: 11400000, guid: f1fa7e827220d7e409a0cabec02895d4, type: 2}
+    qualitySettings: {fileID: 0}
 --- !u!1 &8430335810359649764
 GameObject:
   m_ObjectHideFlags: 0
@@ -2083,6 +2099,10 @@ PrefabInstance:
     - target: {fileID: 1298584834357058, guid: ae07f5a7e50d802419d96b04791e8cc0, type: 3}
       propertyPath: m_Name
       value: FlashlightColor
+      objectReference: {fileID: 0}
+    - target: {fileID: 1298584834357058, guid: ae07f5a7e50d802419d96b04791e8cc0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4082237453981962, guid: ae07f5a7e50d802419d96b04791e8cc0, type: 3}
       propertyPath: m_LocalPosition.x

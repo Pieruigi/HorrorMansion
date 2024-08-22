@@ -6,7 +6,6 @@ namespace CSA
 {
     public class Tags
     {
-        public const string Player = "GameController";
-        public const string Item = "Item";
+ 
     }
 }
