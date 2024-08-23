@@ -6,6 +6,11 @@ namespace CSA
 {
     public class Tags
     {
- 
+        public static string Player = "Player";
+    }
+
+    public class KeyBindings
+    {
+        public static KeyCode InteractionKey = KeyCode.E;
     }
 }

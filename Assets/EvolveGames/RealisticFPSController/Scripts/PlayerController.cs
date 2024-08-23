@@ -6,7 +6,7 @@ using UnityEngine;
 namespace EvolveGames
 {
     [RequireComponent(typeof(CharacterController))]
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : Singleton<PlayerController>
     {
         [Header("PlayerController")]
         [SerializeField] public Transform Camera;
@@ -62,6 +62,10 @@ namespace EvolveGames
         float installGravity;
         bool WallDistance;
         [HideInInspector] public float WalkingValue;
+
+        public bool InteractionDisabled { get; set; } = false;
+        
+
         void Start()
         {
             characterController = GetComponent<CharacterController>();
