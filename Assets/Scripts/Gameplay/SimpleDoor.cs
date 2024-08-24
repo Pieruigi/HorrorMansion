@@ -1,4 +1,5 @@
 using DG.Tweening;
+using MoreMountains.Feedbacks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,6 +14,9 @@ namespace Kidnapped
 
         [SerializeField]
         float openAngle = 90;
+
+        [SerializeField]
+        MMF_Player lockedEffect;
 
 
         DoorController controller;
@@ -53,6 +57,7 @@ namespace Kidnapped
         private void HandleOnDoorOpenFailed(DoorController arg0)
         {
             Debug.Log("The door is locked and can't be opened");
+            lockedEffect.PlayFeedbacks();
         }
 
         private void HandleOnDoorClosed(DoorController controller)
