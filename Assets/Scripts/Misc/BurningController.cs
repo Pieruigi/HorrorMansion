@@ -37,6 +37,8 @@ namespace Kidnapped
         [SerializeField]
         List<AudioSource> audioSources;
 
+        [SerializeField]
+        bool burnOnEnable = false;
        
         bool looping = false;
         float elapsed = 0;
@@ -116,6 +118,12 @@ namespace Kidnapped
                     looping = false;
             }
 
+        }
+
+        private void OnEnable()
+        {
+            if (burnOnEnable)
+                StartBurning();
         }
 
         void ResetBurningShaders()

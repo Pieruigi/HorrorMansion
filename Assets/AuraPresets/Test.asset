@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Test
   m_EditorClassIdentifier: 
   useDensity: 1
-  density: 0.45
+  density: 2.48
   useScattering: 1
   scattering: 0.412
   useAmbientLighting: 1
@@ -25,4 +25,4 @@ MonoBehaviour:
   tint: {r: 0.999999, g: 0.91798955, b: 0.56638414, a: 1}
   tintStrength: 1
   useExtinction: 1
-  extinction: 0.816
+  extinction: 0.923
