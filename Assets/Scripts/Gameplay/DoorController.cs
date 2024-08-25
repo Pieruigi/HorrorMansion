@@ -3,6 +3,7 @@ using EvolveGames;
 using Suburb;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -18,6 +19,7 @@ namespace Kidnapped
         public static UnityAction<DoorController> OnDoorLocked;
         public static UnityAction<DoorController> OnDoorUnlocked;
         public static UnityAction<DoorController> OnDoorClosed;
+        public static UnityAction<DoorController> OnDoorInitialized;
 
         [SerializeField]
         Transform distanceChecker;
@@ -28,29 +30,28 @@ namespace Kidnapped
 
         [SerializeField]
         bool isOpen = false;
+        public bool IsOpen
+        {
+            get { return isOpen; }
+        }
 
         [SerializeField]
         bool isLocked = false;
-
+        public bool IsLocked
+        {
+            get { return isLocked; }
+        }
 
 
         float interactiondDistance = 1.5f;
         bool interactionDisabled = false;
+        public bool InteractionDisabled
+        {
+            get { return interactionDisabled; }
+        }
 
         bool cameraOver = false;
-
-        // Start is called before the first frame update
-        //void Start()
-        //{
-        //    if(isLocked)
-        //        isOpen = false;
-        //    if(isOpen)
-        //    {
-        //        SetInteractionDisable(true);
-        //        OnDoorOpened?.Invoke(this);
-        //    }
-        //}
-
+       
         // Update is called once per frame
         void Update()
         {
@@ -164,6 +165,21 @@ namespace Kidnapped
                 return;
             isLocked = true;
             OnDoorLocked?.Invoke(this);
+        }
+
+        public void Init(bool isLocked, bool isOpened, bool interactionDisabled)
+        {
+            if(isLocked && isOpen)
+            {
+                Debug.LogWarning($"Door can't be at the same time locked and open: {gameObject.name}");
+                return;
+            }
+
+            this.isLocked = isLocked;
+            this.isOpen = isOpened;
+            this.interactionDisabled = interactionDisabled;
+           
+            OnDoorInitialized?.Invoke(this);
         }
     }
 

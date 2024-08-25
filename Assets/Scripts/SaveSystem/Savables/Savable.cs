@@ -13,10 +13,10 @@ namespace Kidnapped.SaveSystem
         public abstract void SetData(object data);
 
         [SerializeField]
-        string saveCode;
-        public string SaveCode
+        string code;
+        public string Code
         {
-            get { return saveCode; }
+            get { return code; }
         }
         
 

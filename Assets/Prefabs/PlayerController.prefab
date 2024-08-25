@@ -967,7 +967,7 @@ MonoBehaviour:
   persistent: 0
   Camera: {fileID: 733289787440413303}
   Items: {fileID: 0}
-  walkingSpeed: 3
+  walkingSpeed: 2.5
   CroughSpeed: 1
   RuningSpeed: 4
   jumpSpeed: 6

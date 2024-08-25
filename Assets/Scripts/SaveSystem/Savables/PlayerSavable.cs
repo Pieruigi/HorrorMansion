@@ -16,7 +16,7 @@ namespace Kidnapped.SaveSystem
 
         public override object GetData()
         {
-            return new PlayerData() { code = SaveCode, HasFlashlight = true };
+            return new PlayerData() { Code = Code, HasFlashlight = true };
         }
 
     }

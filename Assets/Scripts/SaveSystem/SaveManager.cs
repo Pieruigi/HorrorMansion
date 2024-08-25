@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -28,6 +29,7 @@ namespace Kidnapped.SaveSystem
         DataCollection collection = new DataCollection();
 
         string sceneCode = "scn";
+
 
         // Start is called before the first frame update
         void Start()
@@ -63,9 +65,14 @@ namespace Kidnapped.SaveSystem
 
         public void RegisterSavable(Savable savable)
         {
-            if (savables.Contains(savable))
-                return;
-            savables.Add(savable);
+            if (!savables.Contains(savable))
+                savables.Add(savable);
+
+            // Init
+            var data = collection.elements.Find(e => e.Code == savable.Code);
+            if (data != null)
+                savable.SetData(data);
+            
         }
 
         public void UnregisterSavable(Savable savable)
@@ -91,21 +98,28 @@ namespace Kidnapped.SaveSystem
                 // Store the new data
                 collection.elements.Add(data);
             }
-            string json = JsonConvert.SerializeObject(collection);
+            JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+            string json = JsonConvert.SerializeObject(collection, settings);
             Debug.Log($"Json:{json}");
             // Save to fs
             System.IO.File.WriteAllText(System.IO.Path.Combine(Application.persistentDataPath, fileName), json);
         }
 
+        /// <summary>
+        /// Called by the save manager when an old game is loaded.
+        /// We are not calling SetData() on each savable because we are still in the menu here so there are no savables yet
+        /// </summary>
         public void LoadGame()
         {
             // Load json from fs
             string json = GetJsonFromFileSystem();
 
             // Fill collection
-            collection = JsonConvert.DeserializeObject<DataCollection>(json);
+            JsonSerializerSettings settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+            
+            collection = JsonConvert.DeserializeObject<DataCollection>(json, settings);
 
-
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // For testing purpose only
         }
 
         public void ClearAll()

@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Kidnapped.SaveSystem
 {
     [System.Serializable]
-    public abstract class Data
+    public class Data
     {
         public string Code { get; set; }
     }

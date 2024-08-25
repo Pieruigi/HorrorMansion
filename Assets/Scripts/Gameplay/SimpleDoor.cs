@@ -22,10 +22,14 @@ namespace Kidnapped
         DoorController controller;
         Collider coll;
 
+        float angleDefault = 0;
+
         private void Awake()
         {
             controller = GetComponentInParent<DoorController>();
             coll = GetComponent<Collider>();
+            angleDefault = transform.localEulerAngles.y;
+            Initialize();
         }
 
         // Start is called before the first frame update
@@ -45,6 +49,7 @@ namespace Kidnapped
             DoorController.OnDoorOpened += HandleOnDoorOpened;
             DoorController.OnDoorOpenFailed += HandleOnDoorOpenFailed;
             DoorController.OnDoorClosed += HandleOnDoorClosed;
+            DoorController.OnDoorInitialized += HandleOnDoorInitialized;
         }
 
         private void OnDisable()
@@ -52,6 +57,23 @@ namespace Kidnapped
             DoorController.OnDoorOpened -= HandleOnDoorOpened;
             DoorController.OnDoorOpenFailed -= HandleOnDoorOpenFailed;
             DoorController.OnDoorClosed -= HandleOnDoorClosed;
+            DoorController.OnDoorInitialized -= HandleOnDoorInitialized;
+        }
+
+        void Initialize()
+        {
+            transform.localEulerAngles = Vector3.up * angleDefault;
+            if (controller.IsOpen)
+                transform.localEulerAngles += Vector3.up * openAngle;
+        }
+
+        private void HandleOnDoorInitialized(DoorController controller)
+        {
+            if (this.controller != controller)
+                return;
+
+            Initialize();
+            
         }
 
         private void HandleOnDoorOpenFailed(DoorController arg0)

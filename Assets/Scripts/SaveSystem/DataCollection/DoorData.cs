@@ -10,6 +10,8 @@ namespace Kidnapped.SaveSystem
     {
         public bool IsLocked { get; set; }
         public bool IsOpen { get; set; }
+
+        public bool InteractionDisabled { get; set; }
     }
 
 }
