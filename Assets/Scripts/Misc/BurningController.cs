@@ -205,7 +205,9 @@ namespace Kidnapped
 
         void PlayLights(float normalizedValue)
         {
+            
             if(lights == null) return;
+            Debug.Log($"Play lights:{normalizedValue}");
             normalizedValue = Mathf.Clamp01(normalizedValue);
             for (int i=0; i < lights.Count; i++)
             {

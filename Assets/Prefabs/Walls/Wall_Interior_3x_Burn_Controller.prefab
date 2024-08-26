@@ -295,10 +295,10 @@ MonoBehaviour:
   shapeMesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
   fireParticleSystem: {fileID: 4837848941929497569}
   fireEmissionRateArray:
-  - 40
-  - 12
-  - 3.2
-  - 1.5
+  - 60
+  - 19.4
+  - 4.7
+  - 1.96
   lights:
   - {fileID: 3245034039311072383}
   audioSources:
