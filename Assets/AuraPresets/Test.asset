@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Test
   m_EditorClassIdentifier: 
   useDensity: 1
-  density: 2.48
+  density: 3.84
   useScattering: 1
   scattering: 0.412
   useAmbientLighting: 1

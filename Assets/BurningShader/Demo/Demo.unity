@@ -1442,6 +1442,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SingleRendererBurningController
       objectReference: {fileID: 0}
+    - target: {fileID: 8618862507753047616, guid: 7a14dcb608f1ac240bb35356ddb90e20, type: 3}
+      propertyPath: burnOnEnable
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
